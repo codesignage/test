@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Recent Sales</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Cashier</th>
+      <th>Total</th>
+      <th>Paid</th>
+      <th>Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in sales %}
+    <tr>
+      <td>{{ s.id }}</td>
+      <td>{{ s.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+      <td>{{ s.user.email }}</td>
+      <td>{{ '%.2f'|format(s.total_amount|float) }}</td>
+      <td>{{ '%.2f'|format(s.paid_amount|float) }}</td>
+      <td>{{ '%.2f'|format(s.change_amount|float) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
